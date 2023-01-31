@@ -70,7 +70,7 @@ public class DORSUComputerInventorySystem {
                     if (isInputValid) {
                         System.out.print("Enter Component Name:");
                         String componentName = sc.next();
-                        System.out.println("Assign Peripheral to employee? y/n");
+                        System.out.print("Assign Peripheral to employee? y/n");
                         char isPeripheralAssigned = sc.next().charAt(0);
                         String employee;
                         if (isPeripheralAssigned == 'y') {
@@ -166,21 +166,35 @@ public class DORSUComputerInventorySystem {
                 }
                 case 4 -> {
                     if ("input".equals(object.getPeripheralType())) {
-                        System.out.println(object.getPeripheral());
+                        System.out.println("----------------------------------");
+                        System.out.println("Code: " + object.getPeripheralCode());
+                        System.out.println("Employee: " + object.getEmployee());
+                        System.out.println("Peripheral: " + object.getPeripheralName());
+                        System.out.println("Type: " + object.getPeripheralType());
+                        System.out.println("----------------------------------");
                     }
                 }
                 case 5 -> {
                     if ("output".equals(object.getPeripheralType())) {
-                        System.out.println(object.getPeripheral());
+                        System.out.println("----------------------------------");
+                        System.out.println("Code: " + object.getPeripheralCode());
+                        System.out.println("Employee: " + object.getEmployee());
+                        System.out.println("Peripheral: " + object.getPeripheralName());
+                        System.out.println("Type: " + object.getPeripheralType());
+                        System.out.println("----------------------------------");
                     }
                 }
                 case 6 -> {
                     if ("input/output".equals(object.getPeripheralType())) {
-                        System.out.println(object.getPeripheral());
+                        System.out.println("----------------------------------");
+                        System.out.println("Code: " + object.getPeripheralCode());
+                        System.out.println("Employee: " + object.getEmployee());
+                        System.out.println("Peripheral: " + object.getPeripheralName());
+                        System.out.println("Type: " + object.getPeripheralType());
+                        System.out.println("----------------------------------");
                     }
                 }
-                case 7 ->
-                    System.out.println(object.getEmployee());
+
             }
         });
 
