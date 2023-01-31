@@ -18,11 +18,12 @@ public class DORSUComputerInventorySystem {
         String componentType = "";
         do {
             System.out.println("\nDORSU Computer Inventory System");
-            System.out.println("1. Create");
-            System.out.println("2. Read");
-            System.out.println("3. Update");
-            System.out.println("4. Delete");
-            System.out.println("5. Exit");
+            System.out.println("1. Add Peripheral");
+            System.out.println("2. View Records");
+            System.out.println("3. Edit/Update Peripheral");
+            System.out.println("4. Delete Peripheral");
+            System.out.println("5. Generate Report");
+            System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
             String choice = sc.next();
 
@@ -96,6 +97,9 @@ public class DORSUComputerInventorySystem {
                     break;
 
                 case "5":
+                    generateReport();
+                    break;
+                case "6":
                     System.out.println("Exiting...");
                     return;
 
@@ -122,20 +126,20 @@ public class DORSUComputerInventorySystem {
 
     static void read() {
 
-        System.out.println("1. View all peripherals");
-        System.out.println("2. View available peripherals");
-        System.out.println("3. View not available peripherals");
-        System.out.println("4. View all input devices");
-        System.out.println("5. View all output devices");
-        System.out.println("6. View all input/output devices");
-        System.out.println("7. View all employees");
+        System.out.println("a. View all peripherals");
+        System.out.println("b. View available peripherals");
+        System.out.println("c. View not available peripherals");
+        System.out.println("d. View all input devices");
+        System.out.println("e. View all output devices");
+        System.out.println("f. View all input/output devices");
+        System.out.println("g. View all employees");
 
         System.out.print("Enter your choice: ");
-        int userChoice = sc.nextInt();
+        char userChoice = sc.next().charAt(0);
 
         data.forEach(object -> {
             switch (userChoice) {
-                case 1 -> {
+                case 'a' -> {
                     System.out.println("----------------------------------");
                     System.out.println("Code: " + object.getPeripheralCode());
                     System.out.println("Employee: " + object.getEmployee());
@@ -144,7 +148,7 @@ public class DORSUComputerInventorySystem {
                     System.out.println("----------------------------------");
                 }
 
-                case 2 -> {
+                case 'b' -> {
                     if (object.getEmployee().equals("N/A")) {
                         System.out.println("----------------------------------");
                         System.out.println("Code: " + object.getPeripheralCode());
@@ -154,7 +158,7 @@ public class DORSUComputerInventorySystem {
                         System.out.println("----------------------------------");
                     }
                 }
-                case 3 -> {
+                case 'c' -> {
                     if (!object.getEmployee().equals("N/A")) {
                         System.out.println("----------------------------------");
                         System.out.println("Code: " + object.getPeripheralCode());
@@ -164,7 +168,7 @@ public class DORSUComputerInventorySystem {
                         System.out.println("----------------------------------");
                     }
                 }
-                case 4 -> {
+                case 'd' -> {
                     if ("input".equals(object.getPeripheralType())) {
                         System.out.println("----------------------------------");
                         System.out.println("Code: " + object.getPeripheralCode());
@@ -174,7 +178,7 @@ public class DORSUComputerInventorySystem {
                         System.out.println("----------------------------------");
                     }
                 }
-                case 5 -> {
+                case 'e' -> {
                     if ("output".equals(object.getPeripheralType())) {
                         System.out.println("----------------------------------");
                         System.out.println("Code: " + object.getPeripheralCode());
@@ -184,7 +188,7 @@ public class DORSUComputerInventorySystem {
                         System.out.println("----------------------------------");
                     }
                 }
-                case 6 -> {
+                case 'f' -> {
                     if ("input/output".equals(object.getPeripheralType())) {
                         System.out.println("----------------------------------");
                         System.out.println("Code: " + object.getPeripheralCode());
@@ -267,6 +271,45 @@ public class DORSUComputerInventorySystem {
 
     }
 
+    static void generateReport() {
+        int numOfAvailabe = 0, numOfAssigned = 0, numOfInputDev = 0,
+                numOfOutputDev = 0, numOfEmployeesAssigned = 0;
+        for (Peripheral object : data) {
+            if (object.getEmployee().equals("N/A")) {
+                numOfAvailabe++;
+            } else if (!object.getEmployee().equals("N/A")) {
+                numOfAssigned++;
+            } else if (object.getPeripheralType().equals("input")) {
+                numOfInputDev++;
+            } else if (object.getPeripheralType().equals("output")) {
+                numOfOutputDev++;
+            } else if (!object.getEmployee().equals("N/A")) {
+                numOfEmployeesAssigned++;
+            }
+        }
+
+        System.out.println("\nGenerate Report");
+        System.out.println("a -> Number of available peripherals");
+        System.out.println("b -> Number of assigned peripherals");
+        System.out.println("c -> Number of input device");
+        System.out.println("d -> Number of output device");
+        System.out.println("e -> Number of employees with peripherals assigned");
+
+        System.out.print("Enter your choice: ");
+        char choice = sc.next().charAt(0);
+        switch (choice) {
+            case 'a' ->
+                System.out.println("Number of Available Peripherals: " + numOfAvailabe);
+            case 'b' ->
+                System.out.println("Number of Assigned Peripherals: " + numOfAvailabe);
+            case 'c' ->
+                System.out.println("Number of Input Devices: " + numOfAvailabe);
+            case 'd' ->
+                System.out.println("Number of Assigned Peripherals: " + numOfAvailabe);
+            case 'e' ->
+                System.out.println("Number of Assigned Peripherals: " + numOfAvailabe);
+        }
+    }
 }
 
 class Peripheral {
